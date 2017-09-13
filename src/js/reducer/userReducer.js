@@ -1,9 +1,5 @@
 const initialState = {
-    user: {
-      id: null,
-      name: null,
-      age: null,
-    },
+  userList:[],
   fetching: false,
   fetched: false,
   error: null
@@ -12,14 +8,14 @@ const initialState = {
 export default function reducer(state = initialState, action) {
 
   switch (action.type) {
-    case "FETCH_USER_PENDING":
+    case "FETCH_USERS_PENDING":
       {
         return {
           ...state,
           fetching: true
         }
       }
-    case "FETCH_USER_REJECTED":
+    case "FETCH_USERS_REJECTED":
       {
         return {
           ...state,
@@ -27,13 +23,13 @@ export default function reducer(state = initialState, action) {
           error: action.payload
         }
       }
-    case "FETCH_USER_FULFILLED":
+    case "FETCH_USERS_FULFILLED":
       {
         return {
           ...state,
           fetching: false,
           fetched: true,
-          user: action.payload
+          userList: action.payload
         }
       }
   }

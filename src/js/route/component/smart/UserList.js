@@ -1,42 +1,41 @@
 import React from "react";
 import {connect} from "react-redux"
 
-import {fetchComments} from "../../../action/commentActions"
-import CommentListItem from "../dumb/CommentListItem";
+import {fetchUsers} from "../../../action/userActions"
+import UserListItem from "../dumb/UserListItem";
 
 @connect((store) => {
-  return {fetched: store.comments.fetched, fetching: store.comments.fetching, error: store.comments.error, commentList: store.comments.commentList};
+  return {fetched: store.users.fetched, fetching: store.users.fetching, error: store.users.error, userList: store.users.userList};
 })
 
-export default class CommentList extends React.Component {
+export default class UserList extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchComments(this.props.blogId))
+    this.props.dispatch(fetchUsers())
   }
 
   render() {
     const containerStyle = {
       width: "45%"
     };
-    const blogId = this.props.blogId;
-    const {commentList} = this.props;
+    const {userList} = this.props;
     const {fetched} = this.props;
     const {fetching} = this.props;
     const {error} = this.props;
     //console.log("Props", this.props);
-    console.log("CommentList ", {commentList});
+    console.log("UserList", {userList});
 
     if (fetched === true) {
-      console.log("Comment Fetched Condition");
-      const CommentsList = commentList.data.map((comment , i) => <CommentListItem key={comment.id} {...comment}/>);
+      console.log("UserList Fetched Condition");
+      const UsersList = userList.data.map((user, i) => <UserListItem key={user.id} {...user}/>);
       return (
         <div>
-          <div class="row">{CommentsList}</div>
+          <div class="row">{UsersList}</div>
         </div>
       );
     } else if (!{
       error
     }) {
-      console.log("Comment Error Condition");
+      console.log("Users Error Condition");
       return (
         <div class="alert alert-dismissible alert-danger">
           <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -45,7 +44,7 @@ export default class CommentList extends React.Component {
         </div>
       );
     } else { //if ({fetching} === true)
-      console.log("Comment Fetching Condition");
+      console.log("Users Fetching Condition");
       return (
         <div class="progress progress-striped active">
           <div class="progress-bar" style={containerStyle}></div>

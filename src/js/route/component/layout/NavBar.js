@@ -19,6 +19,7 @@ export default class NavBar extends React.Component {
     const { collapsed } = this.state;
     const blogHomeClass = location.pathname === "/" ? "active" : "";
     const newBlogClass = location.pathname.match(/^\/newblog/) ? "active" : "";
+    const viewAuthorsClass = location.pathname.match(/^\/viewauthors/) ? "active" : "";
     const popularBlogClass = location.pathname.match(/^\/popular/) ? "active" : "";
     const userProfileClass = location.pathname.match(/^\/userprofile/) ? "active" : "";
     const loginClass = location.pathname.match(/^\/login/) ? "active" : "";
@@ -34,6 +35,9 @@ export default class NavBar extends React.Component {
               </li>
               <li class={newBlogClass}>
                 <Link to="newblog" >NewBlog</Link>
+              </li>
+              <li class={viewAuthorsClass}>
+                <Link to="viewauthors" >Authors</Link>
               </li>
               <li class={popularBlogClass}>
                 <Link to="popular" >PopularBlogs</Link>

@@ -1,11 +1,14 @@
 import React from "react";
+import AddBlog from "../component/smart/AddBlog";
 
 export default class NewBlog extends React.Component {
   render() {
     console.log("NewBlog Rendered");
     return (
-      <h1>NewBlog</h1>
-// Blog Entry FormInput-->
+      <div>
+      <h1>New Blog </h1>
+      <AddBlog />
+      </div>
     );
   }
 }

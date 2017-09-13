@@ -1,8 +1,8 @@
 import React from "react";
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
   render() {
-    console.log("Login Rendered");
+    console.log("Register Rendered");
     return (
       <div>
         <h1>Login</h1>
@@ -15,7 +15,7 @@ export default class Login extends React.Component {
               <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe">
                 Remember me</input>
             </label>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
           </form>
         </div>
       </div>

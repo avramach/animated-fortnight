@@ -1,11 +1,11 @@
 import { combineReducers } from "redux"
 
 import blogs from "./blogsReducer"
-import comments from "./userReducer"
-import user from "./commentReducer"
+import users from "./userReducer"
+import comments from "./commentReducer"
 
 export default combineReducers({
   blogs,
   comments,
-  user,
+  users,
 })
