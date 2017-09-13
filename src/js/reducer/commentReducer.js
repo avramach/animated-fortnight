@@ -40,9 +40,14 @@ export default function reducer(state = initialState, action) {
       {
         return {
           ...state,
+          commentList: [],
+          fetching: false,
+          fetched: false,
+          error: null,
           posted: false,
           posting: false,
-          posterror: false
+          posterror: false,
+          postedBlog: {}
         }
       }
     case "CREATE_COMMENT_FULFILLED":

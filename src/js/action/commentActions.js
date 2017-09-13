@@ -10,7 +10,7 @@ export function fetchComments(blogId) {
 }
 
 export function createComment(comment) {
-  console.error("CREATE COMMENT ",comment)
+  console.log("CREATE COMMENT ",comment)
   return {
   type: "CREATE_COMMENT",
   payload:   axios.post("http://rest.learncode.academy/api/avramach/comments",comment)

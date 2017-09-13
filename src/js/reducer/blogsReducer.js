@@ -10,7 +10,7 @@ const initialState = {
   singleFetching: false,
   singleFetched: false,
   singleError: null,
-  singleBlog: {},
+  singleBlog: {}
 };
 
 export default function reducer(state = initialState, action) {
@@ -64,13 +64,22 @@ export default function reducer(state = initialState, action) {
           posterror: action.payload
         }
       }
-      case "RESET_BLOG_STATE":
+    case "RESET_BLOG_STATE":
       {
         return {
           ...state,
+          blogList: [],
+          fetching: false,
+          fetched: false,
+          error: null,
           posted: false,
           posting: false,
-          posterror: false
+          posterror: false,
+          postedBlog: {},
+          singleFetching: false,
+          singleFetched: false,
+          singleError: null,
+          singleBlog: {}
         }
       }
     case "FETCH_SINGLE_BLOG_PENDING":

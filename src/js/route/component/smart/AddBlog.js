@@ -1,16 +1,18 @@
 import React from "react";
 import {connect} from "react-redux"
+import {Link} from "react-router";
 
-import BlogForm from "../dumb/BlogForm";
 import {createBlog} from "../../../action/blogActions"
 import {resetBlogStore} from "../../../action/blogActions"
+import BlogForm from "../dumb/BlogForm";
+import ErrorIndicator from "../layout/ErrorIndicator";
+import ProgressBar from "../layout/ProgressBar";
 
 @connect((store) => {
   return {posted: store.blogs.posted, posting: store.blogs.posting, posterror: store.blogs.posterror, postedBlog: store.blogs.postedBlog};
 })
 
 export default class AddBlog extends React.Component {
-
   constructor() {
     super();
     this.state = {
@@ -33,45 +35,38 @@ export default class AddBlog extends React.Component {
     fields.author = "dvalente2";
     this.props.dispatch(createBlog(fields))
   }
+  navigate() {
+    console.log("Navigate Called", this.props);
+    this.props.history.pushState(null, navigateLink());
+  }
+  navigateLink() {
+    return "viewblog/" + this.props.postedBlog.id;
+  }
 
   render() {
-    const containerStyle = {
-      width: "45%"
-    };
     const {posted} = this.props;
     const {posting} = this.props;
     const {posterror} = this.props;
 
-    console.log("Rendering AddBlog ",this.props);
+    console.log("Rendering AddBlog ", this.props);
 
     if (posting === true) {
       console.log("Posting Condition");
-      return (
-        <div class="progress progress-striped active">
-          <div class="progress-bar" style={containerStyle}></div>
-        </div>
-      ); //return (<h1>Fetching Blogs Loading Spinner</h1>);
-    } else if (!{
-      posterror
-    }){
+      return (<ProgressBar/>);
+    } else if (posterror) {
       console.log("Error Condition");
-      return (
-        <div class="alert alert-dismissible alert-danger">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>Oh snap!</strong>
-          <a href="#" class="alert-link">Something Went Wrong,Retry Again</a>
-        </div>
-      );
+      return (<ErrorIndicator/>);
     } else if (posted === true) {
       console.log("Posted Complete");
       return (
-        <h1>Blog Post Complete</h1>
+        <div class="alert alert-dismissible alert-success">
+          <strong>Blog Succesfully Created !</strong>
+          <Link to={this.navigateLink()} class="alert-link">Take me to the Blog</Link>.
+        </div>
       );
     } else {
       return (
-        <div>
-          <BlogForm onSubmit={this.onSubmit.bind(this)}/>
-        </div>
+        <div><BlogForm onSubmit={this.onSubmit.bind(this)}/></div>
       );
     }
   }

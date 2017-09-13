@@ -10,7 +10,7 @@ import ViewBlog from "./route/page/ViewBlog"
 import NewBlog from "./route/page/NewBlog"
 import UserProfile from "./route/page/UserProfile"
 import ViewAuthors from "./route/page/ViewAuthors"
-import Login from "./route/page/Login"
+import SignIn from "./route/page/SignIn"
 
 const app = document.getElementById('app');
 
@@ -24,7 +24,7 @@ ReactDOM.render(
       <Route path="viewblog(/:blogId)" name="ViewBlog" component={ViewBlog}></Route>
       <Route path="newblog" name="NewBlog" component={NewBlog}></Route>
       <Route path="userprofile" name="UserProfile" component={UserProfile}></Route>
-      <Route path="login" name="Login" component={Login}></Route>
+      <Route path="signin(/:action)" name="SignIn" component={SignIn}></Route>
     </Route>
   </Router>
 </Provider>, app);

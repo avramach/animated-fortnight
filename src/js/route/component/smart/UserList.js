@@ -3,6 +3,8 @@ import {connect} from "react-redux"
 
 import {fetchUsers} from "../../../action/userActions"
 import UserListItem from "../dumb/UserListItem";
+import ErrorIndicator from "../layout/ErrorIndicator";
+import ProgressBar from "../layout/ProgressBar";
 
 @connect((store) => {
   return {fetched: store.users.fetched, fetching: store.users.fetching, error: store.users.error, userList: store.users.userList};
@@ -14,9 +16,6 @@ export default class UserList extends React.Component {
   }
 
   render() {
-    const containerStyle = {
-      width: "45%"
-    };
     const {userList} = this.props;
     const {fetched} = this.props;
     const {fetching} = this.props;
@@ -32,24 +31,12 @@ export default class UserList extends React.Component {
           <div class="row">{UsersList}</div>
         </div>
       );
-    } else if (!{
-      error
-    }) {
+    } else if (error) {
       console.log("Users Error Condition");
-      return (
-        <div class="alert alert-dismissible alert-danger">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>Oh snap!</strong>
-          <a href="#" class="alert-link">Something Went Wrong,Retry Again</a>
-        </div>
-      );
+      return (<ErrorIndicator/>);
     } else { //if ({fetching} === true)
       console.log("Users Fetching Condition");
-      return (
-        <div class="progress progress-striped active">
-          <div class="progress-bar" style={containerStyle}></div>
-        </div>
-      ); //return (<h1>Fetching Blogs Loading Spinner</h1>);
+      return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
     }
   }
 }

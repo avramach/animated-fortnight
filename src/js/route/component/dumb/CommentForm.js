@@ -15,7 +15,7 @@ export default class CommentForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.error("onsubmit of commentform", this.state)
+    console.log("onsubmit of commentform", this.state)
     this.props.onSubmit(this.state);
   }
 
