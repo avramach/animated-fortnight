@@ -37,7 +37,7 @@ export default function reducer(state = initialState, action) {
           ...state,
           fetching: false,
           fetched: true,
-          blogList: action.payload
+          blogList: action.payload.data
         }
       }
     case "CREATE_BLOG_FULFILLED":
@@ -46,7 +46,7 @@ export default function reducer(state = initialState, action) {
           ...state,
           posting: false,
           posted: true,
-          postedBlog: action.payload
+          postedBlog: action.payload.data
         }
       }
     case "CREATE_BLOG_PENDING":
@@ -103,7 +103,7 @@ export default function reducer(state = initialState, action) {
           ...state,
           singleFetching: false,
           singleFetched: true,
-          singleBlog: action.payload
+          singleBlog: action.payload.data
         }
       }
   }

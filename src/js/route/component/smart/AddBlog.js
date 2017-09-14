@@ -6,12 +6,12 @@ import {createBlog} from "../../../action/blogActions"
 import {resetBlogStore} from "../../../action/blogActions"
 import BlogForm from "../dumb/BlogForm";
 import ErrorIndicator from "../layout/ErrorIndicator";
+import OverlayMessage from "../layout/OverlayMessage";
 import ProgressBar from "../layout/ProgressBar";
 
 @connect((store) => {
   return {
-    posted: store.blogs.posted, posting: store.blogs.posting, posterror: store.blogs.posterror, postedBlog: store.blogs.postedBlog
-    ,authdetails: store.authenticate.authenticatedUser
+    posted: store.blogs.posted, posting: store.blogs.posting, posterror: store.blogs.posterror, postedBlog: store.blogs.postedBlog, authdetails: store.authenticate.authenticatedUser
   };
 })
 
@@ -22,11 +22,12 @@ export default class AddBlog extends React.Component {
       fields: {
         title: "",
         image: "",
-        categories: "",
-        BlogMessage: "",
+        category: "",
+        blogMessage: "",
         author: ""
       }
     };
+    this.navigateClicked = this.navigateClicked.bind(this);
   }
   componentWillMount() {
     this.props.dispatch(resetBlogStore())
@@ -34,17 +35,21 @@ export default class AddBlog extends React.Component {
 
   onSubmit(fields) {
     this.setState(fields);
-    console.log("Onsubmit AddBlog: ", this.state, fields);
+    ////console.log("Onsubmit AddBlog: ", this.state, fields);
     const token = this.props.authdetails.token;
     fields.author = this.props.authdetails.userName;
-    this.props.dispatch(createBlog(token,fields))
+    this.props.dispatch(createBlog(token, fields))
   }
-  navigate() {
-    console.log("Navigate Called", this.props);
-    this.props.history.pushState(null, navigateLink());
+
+  navigateClicked = e => {
+    e.preventDefault();
+    this.props.history.pushState(null, this.navigateLink(e.target.id));
   }
-  navigateLink() {
-    return "viewblog/" + this.props.postedBlog.blogId;
+
+  navigateLink(id) {
+    if (id == "ok") {
+      return "viewblog/" + this.props.postedBlog.blogId;
+    }
   }
 
   render() {
@@ -52,22 +57,17 @@ export default class AddBlog extends React.Component {
     const {posting} = this.props;
     const {posterror} = this.props;
 
-    console.log("Rendering AddBlog ", this.props);
+    ////console.log("Rendering AddBlog ", this.props);
 
     if (posting === true) {
-      console.log("Posting Condition");
+      ////console.log("Posting Condition");
       return (<ProgressBar/>);
     } else if (posterror) {
-      console.log("Error Condition");
+      ////console.log("Error Condition");
       return (<ErrorIndicator/>);
     } else if (posted === true) {
-      console.log("Posted Complete");
-      return (
-        <div class="alert alert-dismissible alert-success">
-          <strong>Blog Succesfully Created !</strong>
-          <Link to={this.navigateLink()} class="alert-link">Take me to the Blog</Link>.
-        </div>
-      );
+      ////console.log("Posted Complete");
+      return (<OverlayMessage message="New Blog Created" navigateClicked={this.navigateClicked} id="ok" title="OK"/>);
     } else {
       return (
         <div><BlogForm onSubmit={this.onSubmit.bind(this)}/></div>

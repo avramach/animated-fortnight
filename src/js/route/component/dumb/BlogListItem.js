@@ -8,9 +8,9 @@ export default class BlogListItem extends React.Component {
   }
   render() {
     const  blog  = this.props;
-    //console.log("Rendering Blog" , this.props);
-    //console.log("Blog Object " , blog);
-    //console.log("Blog Id" , blog.blogId ,blog.id , blog.title);
+    //////console.log("Rendering Blog" , this.props);
+    //////console.log("Blog Object " , blog);
+    //////console.log("Blog Id" , blog.blogId ,blog.id , blog.title);
     return (
       <div class="col-md-4">
         <h2><Link to={this.navigate()}>Title:{blog.title}</Link></h2>

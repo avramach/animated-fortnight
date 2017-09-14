@@ -23,12 +23,12 @@ export default class CommentList extends React.Component {
     const {fetched} = this.props;
     const {fetching} = this.props;
     const {error} = this.props;
-    //console.log("Props", this.props);
-    console.log("CommentList ", {commentList});
+    //////console.log("Props", this.props);
+    ////console.log("CommentList ", {commentList});
 
     if (fetched === true) {
-      console.log("Comment Fetched Condition");
-      const CommentsList = commentList.data.map((comment, i) => <CommentListItem key={comment.commentId} {...comment}/>);
+      ////console.log("Comment Fetched Condition");
+      const CommentsList = commentList.map((comment, i) => <CommentListItem key={comment.commentId} {...comment}/>);
       return (
         <div>
           <h4>Comments</h4>
@@ -37,10 +37,10 @@ export default class CommentList extends React.Component {
         </div>
       );
     } else if (error) {
-      console.log("Comment Error Condition");
+      ////console.log("Comment Error Condition");
       return (<ErrorIndicator/>);
     } else { //if ({fetching} === true)
-      console.log("Comment Fetching Condition");
+      ////console.log("Comment Fetching Condition");
       return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
     }
   }

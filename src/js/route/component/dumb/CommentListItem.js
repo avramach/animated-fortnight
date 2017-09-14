@@ -3,8 +3,8 @@ import React from "react";
 export default class CommentListItem extends React.Component {
   render() {
     const comment = this.props;
-    console.log("Rendering Comment", this.props);
-    //console.log("Blog Object " , blog);
+    ////console.log("Rendering Comment", this.props);
+    //////console.log("Blog Object " , blog);
     return (
       <div>
         <div class="media">

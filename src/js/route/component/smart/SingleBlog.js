@@ -19,6 +19,11 @@ export default class SingleBlog extends React.Component {
     this.props.dispatch(fetchSingleBlog(this.props.blogId))
   }
 
+  navigate(link) {
+    //console.log("SINGLE BLOG NAVIGATION",link);
+    this.props.history.pushState(null, link);
+  }
+
   render() {
     //console.log("SingleBlog Props",this.props);
     const blogId = this.props.blogId;
@@ -26,17 +31,16 @@ export default class SingleBlog extends React.Component {
     const {singleFetched} = this.props;
     const {singleFetching} = this.props;
     const {singleError} = this.props;
-    console.log("Props", this.props);
-    //console.log("blogItem", blogId, {singleBlog});
+    ////console.log("Props", this.props);
 
     if (singleFetched === true) {
-      console.log("Single Blog item Fetched Condition");
+      ////console.log("Single Blog item Fetched Condition");
       return (
         <div>
           <div class="row">
             <div class="col-lg-8">
-              <Blog blog={singleBlog.data}/>
-              <AddComment blogId={blogId}/>
+              <Blog blog={singleBlog}/>
+              <AddComment blogId={blogId} navigate = {this.navigate.bind(this)}/>
               <CommentList blogId={blogId}/>
             </div>
           </div>
@@ -44,10 +48,10 @@ export default class SingleBlog extends React.Component {
         </div>
       );
     } else if (singleError) {
-      console.log("Single Blog Error Condition");
+      ////console.log("Single Blog Error Condition");
       return (<ErrorIndicator/>);
     } else { //if ({singleFetching} === true)
-      console.log("Single Blog Fetching Condition");
+      ////console.log("Single Blog Fetching Condition");
       return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
     }
   }

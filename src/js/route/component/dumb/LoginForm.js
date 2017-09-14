@@ -16,12 +16,12 @@ export default class LoginForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log("onsubmit of LoginForm", this.state)
+    ////console.log("onsubmit of LoginForm", this.state)
     this.props.onSubmit(this.state);
   }
 
   render() {
-    console.log("LoginForm Rendered");
+    ////console.log("LoginForm Rendered");
     return (
         <div class="wrapper">
           <form class="form-signin">

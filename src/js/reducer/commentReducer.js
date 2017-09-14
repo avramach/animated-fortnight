@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
           ...state,
           fetching: false,
           fetched: true,
-          commentList: action.payload
+          commentList: action.payload.data
         }
       }
     case "RESET_COMMENT_STATE":
@@ -56,7 +56,7 @@ export default function reducer(state = initialState, action) {
           ...state,
           posting: false,
           posted: true,
-          postedComment: action.payload
+          postedComment: action.payload.data
         }
       }
     case "CREATE_COMMENT_PENDING":

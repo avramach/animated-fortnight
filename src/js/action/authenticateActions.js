@@ -4,7 +4,7 @@ const ServerURL = "http://192.168.0.103:8080/reactx"
 
 export function authenticateUser(user) {
   const url = ServerURL+"/users/"+"authenticateUser";
-  console.error("authencticaiton ",url , user)
+  //console.log("authencticaiton ",url , user)
   return {
     type: 'AUTHENTICATE',
     payload:   axios.post(url,user)

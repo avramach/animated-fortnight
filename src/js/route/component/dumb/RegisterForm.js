@@ -20,12 +20,12 @@ export default class RegisterForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log("onsubmit of RegisterForm", this.state)
+    ////console.log("onsubmit of RegisterForm", this.state)
     this.props.onSubmit(this.state);
   }
 
   render() {
-    console.log("RegisterForm Rendered");
+    ////console.log("RegisterForm Rendered");
     return (
       <div>
         <div class="wrapper">

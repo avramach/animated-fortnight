@@ -15,7 +15,7 @@ import ProgressBar from "../layout/ProgressBar";
 
 export default class UserList extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchUsers(this.props.authdetails))
+    this.props.dispatch(fetchUsers(this.props.authdetails.token))
   }
 
   render() {
@@ -23,23 +23,18 @@ export default class UserList extends React.Component {
     const {fetched} = this.props;
     const {fetching} = this.props;
     const {error} = this.props;
-    //console.log("Props", this.props);
-    console.log("UserList", {userList});
-
+    //////console.log("Props", this.props);
     if (fetched === true) {
-      console.log("UserList Fetched Condition");
-      const UsersList = userList.data.map((user, i) => <UserListItem key={i} {...user}/>);
+      const UsersList = userList.map((user, i) => <UserListItem key={i} user={user}/>);
       return (
         <div>
           <div class="row">{UsersList}</div>
         </div>
       );
     } else if (error) {
-      console.log("Users Error Condition");
       return (<ErrorIndicator/>);
-    } else { //if ({fetching} === true)
-      console.log("Users Fetching Condition");
-      return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
+    } else {
+      return (<ProgressBar/>);
     }
   }
 }

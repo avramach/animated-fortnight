@@ -8,7 +8,7 @@ export default class BasicLayout extends React.Component {
     const containerStyle = {
       marginTop: "60px"
     };
-    console.log("Basiclayout Rendered");
+    ////console.log("Basiclayout Rendered");
     return (
       <div>
         <NavBar location={location}/>

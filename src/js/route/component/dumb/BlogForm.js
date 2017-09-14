@@ -6,8 +6,8 @@ export default class BlogForm extends React.Component {
     this.state = {
       title: "",
       image: "",
-      categories: "",
-      BlogMessage: ""
+      category: "",
+      blogMessage: ""
     };
   }
 
@@ -19,7 +19,7 @@ export default class BlogForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log("onsubmit of blogform ", this.state)
+    ////console.log("onsubmit of blogform ", this.state)
     this.props.onSubmit(this.state);
   }
 
@@ -29,7 +29,7 @@ export default class BlogForm extends React.Component {
   }
 
   render() {
-    console.log("BlogForm Rendered");
+    ////console.log("BlogForm Rendered");
     return (
       <div>
         <form class="form-horizontal">
@@ -51,15 +51,15 @@ export default class BlogForm extends React.Component {
               </div>
             </div>
             <div class="form-group">
-              <label for="categories" class="col-lg-2 control-label">Category</label>
+              <label for="category" class="col-lg-2 control-label">Category</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" id="categories" onChange={e => this.change(e)}></input>
+                <input type="text" class="form-control" id="category" onChange={e => this.change(e)}></input>
               </div>
             </div>
             <div class="form-group">
-              <label for="BlogMessage" class="col-lg-2 control-label">Content</label>
+              <label for="blogMessage" class="col-lg-2 control-label">Content</label>
               <div class="col-lg-10">
-                <textarea class="form-control" rows="3" id="BlogMessage" onChange={e => this.change(e)}></textarea>
+                <textarea class="form-control" rows="3" id="blogMessage" onChange={e => this.change(e)}></textarea>
                 <span class="help-block">Enter the content</span>
               </div>
             </div>

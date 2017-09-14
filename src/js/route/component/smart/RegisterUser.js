@@ -7,6 +7,7 @@ import {resetUserStore} from "../../../action/userActions"
 import RegisterForm from "../dumb/RegisterForm"
 import ErrorIndicator from "../layout/ErrorIndicator";
 import ProgressBar from "../layout/ProgressBar";
+import OverlayMessage from "../layout/OverlayMessage";
 
 @connect((store) => {
   return {registered: store.users.registered, registering: store.users.registering, registerError: store.users.registerError, registeredUser: store.users.registeredUser};
@@ -25,6 +26,7 @@ export default class RegisterUser extends React.Component {
       emailId: ""
       }
     };
+    this.navigateClicked = this.navigateClicked.bind(this);
   }
   componentWillMount() {
     this.props.dispatch(resetUserStore())
@@ -32,11 +34,11 @@ export default class RegisterUser extends React.Component {
 
   onSubmit(fields) {
     this.setState(fields);
-    console.error("Onsubmit RegisterUser: ", this.state, fields);
+    //console.log("Onsubmit RegisterUser: ", this.state, fields);
     this.props.dispatch(registerUser(fields))
   }
-  navigate() {
-    console.log("Navigate Called", this.props);
+  navigateClicked() {
+    ////console.log("Navigate Called", this.props);
     this.props.history.pushState(null, navigateLink());
   }
   navigateLink() {
@@ -48,21 +50,18 @@ export default class RegisterUser extends React.Component {
     const {registering} = this.props;
     const {registerError} = this.props;
 
-    console.log("Rendering RegisterUser", this.props);
+    ////console.log("Rendering RegisterUser", this.props);
 
     if (registering === true) {
-      console.log("registering Condition");
+      ////console.log("registering Condition");
       return (<ProgressBar/>);
     } else if (registerError) {
-      console.log("Register Error Condition");
+      ////console.log("Register Error Condition");
       return (<ErrorIndicator/>);
     } else if (registered === true) {
-      console.log("Posted Complete");
+      ////console.log("Posted Complete");
       return (
-        <div class="alert alert-dismissible alert-success">
-          <strong>User Succesfully Registered !</strong>
-          <Link to={this.navigateLink()} class="alert-link">Take me to Login</Link>.
-        </div>
+        <OverlayMessage message="User Succesfully Created" navigateClicked={this.navigateClicked} id="login" title="LOGIN"/>
       );
     } else {
       return (

@@ -5,14 +5,13 @@ import {Link} from "react-router";
 import CommentForm from "../dumb/CommentForm";
 import ErrorIndicator from "../layout/ErrorIndicator";
 import ProgressBar from "../layout/ProgressBar";
+import OverlayMessage from "../layout/OverlayMessage";
 import {createComment} from "../../../action/commentActions"
 import {resetCommentStore} from "../../../action/commentActions"
+import {fetchComments} from "../../../action/commentActions"
 
 @connect((store) => {
-  return {
-    posted: store.comments.posted, posting: store.comments.posting, posterror: store.comments.posterror, postedComment: store.comments.postedComment
-    ,authdetails: store.authenticate.authenticatedUser
-  };
+  return {posted: store.comments.posted, posting: store.comments.posting, posterror: store.comments.posterror, postedComment: store.comments.postedComment, authdetails: store.authenticate.authenticatedUser};
 })
 
 export default class AddBlog extends React.Component {
@@ -26,6 +25,7 @@ export default class AddBlog extends React.Component {
         blogId: ""
       }
     };
+    this.navigateClicked = this.navigateClicked.bind(this);
   }
   componentWillMount() {
     this.props.dispatch(resetCommentStore())
@@ -33,44 +33,44 @@ export default class AddBlog extends React.Component {
 
   onSubmit(fields) {
     this.setState(fields);
-    console.log("Onsubmit AddComment: ", this.state, fields);
+    //console.log("Onsubmit AddComment: ", this.state, fields);
     const token = this.props.authdetails.token;
     fields.author = this.props.authdetails.userName;
     fields.blogId = this.props.blogId;
-    this.props.dispatch(createComment(token,fields.blogId ,fields))
+    this.props.dispatch(createComment(token, fields.blogId, fields))
   }
 
-  navigate() {
-    console.log("Navigate Called", this.props);
-    this.props.history.pushState(null, navigateLink());
-  }
-  navigateLink() {
-    return "viewblog/" + this.props.blogId;
+  navigateClicked = e => {
+    e.preventDefault();
+    var link ="";
+    if (e.target.id == "ok") {
+      link = "viewblog/" + this.props.blogId;
+    }
+    this.props.dispatch(resetCommentStore())
+    this.props.dispatch(fetchComments(this.props.blogId))
+    //this.props.navigate(link);
   }
 
   render() {
-    const containerStyle = {
-      width: "45%"
-    };
     const {posted} = this.props;
     const {posting} = this.props;
     const {posterror} = this.props;
     const {blogId} = this.props;
 
-    console.log("Rendering AddComment ", this.props, blogId);
+    ////console.log("Rendering AddComment ", this.props, blogId);
 
     if (posting === true) {
-      console.log("Posting Condition");
+      ////console.log("Posting Condition");
       return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
     } else if (posterror) {
-      console.log("AddComment Error Condition");
+      ////console.log("AddComment Error Condition");
       return (<ErrorIndicator/>);
     } else if (posted === true) {
-      console.log("Posted Complete");
+      ////console.log("Posted Complete");
       return (
-        <div class="alert alert-dismissible alert-success">
-          <strong>Comment Succesfully Created !</strong>
-          <Link to={this.navigateLink()} class="alert-link">Back to Current Blog</Link>.
+        <div>
+        <CommentForm onSubmit={this.onSubmit.bind(this)}/>
+        <OverlayMessage message="New Comment Created" navigateClicked={this.navigateClicked} id="ok" title="OK"/>
         </div>
       );
     } else {

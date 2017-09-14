@@ -15,12 +15,12 @@ export default class CommentForm extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    console.log("onsubmit of commentform", this.state)
+    ////console.log("onsubmit of commentform", this.state)
     this.props.onSubmit(this.state);
   }
 
   render() {
-    console.log("CommentForm Rendered");
+    ////console.log("CommentForm Rendered");
     return (
           <div>
           <hr></hr>

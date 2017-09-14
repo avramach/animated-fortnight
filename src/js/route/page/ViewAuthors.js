@@ -3,7 +3,7 @@ import UserList from "../component/smart/UserList";
 
 export default class ViewAuthors extends React.Component {
   render() {
-    console.log("ViewAuthors Rendered");
+    ////console.log("ViewAuthors Rendered");
     return (
       <div>
       <h1>View Authors</h1>

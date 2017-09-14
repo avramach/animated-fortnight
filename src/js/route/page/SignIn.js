@@ -5,12 +5,11 @@ import { Link } from "react-router";
 
 export default class SignIn extends React.Component {
   navigate(link) {
-    console.error("SIGNIN NAVIGATION",link);
+    //console.log("SIGNIN NAVIGATION",link);
     this.props.history.pushState(null, link);
   }
   render() {
     const action = this.props.params.action;
-    console.log("Signin Rendered ", this.props,action);
 
     if (action == "register") {
       return (

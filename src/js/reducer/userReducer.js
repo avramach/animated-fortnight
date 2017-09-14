@@ -7,7 +7,10 @@ const initialState = {
   registered: false,
   registerError: null,
   registerUser: {},
-  authDetails: {}
+  singleFetched: false,
+  singleFetching: false,
+  singleError: null,
+  singleUser: {}
 };
 
 export default function reducer(state = initialState, action) {
@@ -34,7 +37,7 @@ export default function reducer(state = initialState, action) {
           ...state,
           fetching: false,
           fetched: true,
-          userList: action.payload
+          userList: action.payload.data
         }
       }
     case "RESET_USERS_STATE":
@@ -47,7 +50,11 @@ export default function reducer(state = initialState, action) {
           registering: false,
           registered: false,
           registerError: null,
-          registerUser: {}
+          registerUser: {},
+          singleFetched: false,
+          singleFetching: false,
+          singleError: null,
+          singleUser: {}
         }
       }
     case "REGISTER_USER_PENDING":
@@ -72,6 +79,30 @@ export default function reducer(state = initialState, action) {
           registering: false,
           registered: true,
           registeredUser: action.payload
+        }
+      }
+    case "FETCH_SINGLE_USER_PENDING":
+      {
+        return {
+          ...state,
+          singleFetching: true
+        }
+      }
+    case "FETCH_SINGLE_USER_REJECTED":
+      {
+        return {
+          ...state,
+          singleFetching: false,
+          singleError: action.payload
+        }
+      }
+    case "FETCH_SINGLE_USER_FULFILLED":
+      {
+        return {
+          ...state,
+          singleFetching: false,
+          singleFetched: true,
+          singleUser: action.payload.data
         }
       }
   }

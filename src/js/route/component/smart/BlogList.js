@@ -14,7 +14,11 @@ import {resetBlogStore} from "../../../action/blogActions"
 export default class BlogList extends React.Component {
   componentWillMount() {
     this.props.dispatch(resetBlogStore())
-    this.props.dispatch(fetchBlogs())
+    if (this.props.userName === undefined) {
+      this.props.dispatch(fetchBlogs())
+    } else {
+      this.props.dispatch(fetchBlogs(this.props.userName))
+    }
   }
 
   render() {
@@ -22,14 +26,10 @@ export default class BlogList extends React.Component {
     const {fetched} = this.props;
     const {fetching} = this.props;
     const {error} = this.props;
-    //console.log("Props", this.props);
-    console.log("BlogList ", {blogList});
-    //console.log("Rendering BlogList ", fetched);
+    //////console.log("Props", this.props);
 
     if (fetched === true) {
-      //console.log("Fetched True");
-      const BlogsList = blogList.data.map((blog, i) => <BlogListItem key={blog.blogId} {...blog}/>);
-      console.log("mapped", BlogsList);
+      const BlogsList = blogList.map((blog, i) => <BlogListItem key={blog.blogId} {...blog}/>);
 
       return (
         <div>
@@ -37,11 +37,9 @@ export default class BlogList extends React.Component {
         </div>
       );
     } else if (error) {
-      console.log("Error Condition");
       return (<ErrorIndicator/>);
-    } else { //if ({fetching} === true)
-      console.log("Fetching Condition");
-      return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
+    } else {
+      return (<ProgressBar/>);
     }
   }
 }
