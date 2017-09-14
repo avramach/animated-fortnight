@@ -28,9 +28,11 @@ export default class CommentList extends React.Component {
 
     if (fetched === true) {
       console.log("Comment Fetched Condition");
-      const CommentsList = commentList.data.map((comment, i) => <CommentListItem key={comment.id} {...comment}/>);
+      const CommentsList = commentList.data.map((comment, i) => <CommentListItem key={comment.commentId} {...comment}/>);
       return (
         <div>
+          <h4>Comments</h4>
+          <hr></hr>
           <div class="row">{CommentsList}</div>
         </div>
       );

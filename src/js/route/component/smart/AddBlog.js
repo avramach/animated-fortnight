@@ -9,7 +9,10 @@ import ErrorIndicator from "../layout/ErrorIndicator";
 import ProgressBar from "../layout/ProgressBar";
 
 @connect((store) => {
-  return {posted: store.blogs.posted, posting: store.blogs.posting, posterror: store.blogs.posterror, postedBlog: store.blogs.postedBlog};
+  return {
+    posted: store.blogs.posted, posting: store.blogs.posting, posterror: store.blogs.posterror, postedBlog: store.blogs.postedBlog
+    ,authdetails: store.authenticate.authenticatedUser
+  };
 })
 
 export default class AddBlog extends React.Component {
@@ -32,15 +35,16 @@ export default class AddBlog extends React.Component {
   onSubmit(fields) {
     this.setState(fields);
     console.log("Onsubmit AddBlog: ", this.state, fields);
-    fields.author = "dvalente2";
-    this.props.dispatch(createBlog(fields))
+    const token = this.props.authdetails.token;
+    fields.author = this.props.authdetails.userName;
+    this.props.dispatch(createBlog(token,fields))
   }
   navigate() {
     console.log("Navigate Called", this.props);
     this.props.history.pushState(null, navigateLink());
   }
   navigateLink() {
-    return "viewblog/" + this.props.postedBlog.id;
+    return "viewblog/" + this.props.postedBlog.blogId;
   }
 
   render() {

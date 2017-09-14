@@ -29,7 +29,7 @@ export default function reducer(state = initialState, action) {
           ...state,
           authenticating: false,
           authenticated: true,
-          authenticatedUser: action.payload
+          authenticatedUser: action.payload.data
         }
       }
     case "RESET_AUTHENTICATE_STATE":

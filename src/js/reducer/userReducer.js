@@ -6,7 +6,8 @@ const initialState = {
   registering: false,
   registered: false,
   registerError: null,
-  registerUser: {}
+  registerUser: {},
+  authDetails: {}
 };
 
 export default function reducer(state = initialState, action) {

@@ -4,6 +4,10 @@ import RegisterUser from "../component/smart/RegisterUser";
 import { Link } from "react-router";
 
 export default class SignIn extends React.Component {
+  navigate(link) {
+    console.error("SIGNIN NAVIGATION",link);
+    this.props.history.pushState(null, link);
+  }
   render() {
     const action = this.props.params.action;
     console.log("Signin Rendered ", this.props,action);
@@ -12,7 +16,7 @@ export default class SignIn extends React.Component {
       return (
         <div>
           <h1>Register</h1>
-          <RegisterUser/>
+          <RegisterUser navigate={this.navigate.bind(this)}/>
           <Link to="signin/login"><h4>Already Registered?: Login</h4></Link>
         </div>
       );
@@ -20,7 +24,7 @@ export default class SignIn extends React.Component {
       return (
         <div>
           <h1>Login</h1>
-          <Login/>
+          <Login navigate={this.navigate.bind(this)}/>
           <Link to="signin/register"><h4>Create new account: Register</h4></Link>
         </div>
       );

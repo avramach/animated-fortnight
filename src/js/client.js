@@ -23,7 +23,7 @@ ReactDOM.render(
       <Route path="viewauthors" name="ViewAuthors" component={ViewAuthors}></Route>
       <Route path="viewblog(/:blogId)" name="ViewBlog" component={ViewBlog}></Route>
       <Route path="newblog" name="NewBlog" component={NewBlog}></Route>
-      <Route path="userprofile" name="UserProfile" component={UserProfile}></Route>
+      <Route path="userprofile(/:author)" name="UserProfile" component={UserProfile}></Route>
       <Route path="signin(/:action)" name="SignIn" component={SignIn}></Route>
     </Route>
   </Router>

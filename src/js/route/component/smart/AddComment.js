@@ -9,7 +9,10 @@ import {createComment} from "../../../action/commentActions"
 import {resetCommentStore} from "../../../action/commentActions"
 
 @connect((store) => {
-  return {posted: store.comments.posted, posting: store.comments.posting, posterror: store.comments.posterror, postedComment: store.comments.postedComment};
+  return {
+    posted: store.comments.posted, posting: store.comments.posting, posterror: store.comments.posterror, postedComment: store.comments.postedComment
+    ,authdetails: store.authenticate.authenticatedUser
+  };
 })
 
 export default class AddBlog extends React.Component {
@@ -31,9 +34,10 @@ export default class AddBlog extends React.Component {
   onSubmit(fields) {
     this.setState(fields);
     console.log("Onsubmit AddComment: ", this.state, fields);
-    fields.author = "dvalente2";
+    const token = this.props.authdetails.token;
+    fields.author = this.props.authdetails.userName;
     fields.blogId = this.props.blogId;
-    this.props.dispatch(createComment(fields))
+    this.props.dispatch(createComment(token,fields.blogId ,fields))
   }
 
   navigate() {

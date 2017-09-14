@@ -28,7 +28,7 @@ export default class BlogList extends React.Component {
 
     if (fetched === true) {
       //console.log("Fetched True");
-      const BlogsList = blogList.data.map((blog, i) => <BlogListItem key={blog.id} {...blog}/>);
+      const BlogsList = blogList.data.map((blog, i) => <BlogListItem key={blog.blogId} {...blog}/>);
       console.log("mapped", BlogsList);
 
       return (
