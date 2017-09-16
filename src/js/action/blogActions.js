@@ -2,10 +2,23 @@
 import axios from "axios";
 const ServerURL = "http://192.168.0.103:8080/reactx"
 
-export function fetchBlogs(userName) {
+export function fetchBlogs() {
+  var url = ServerURL + "/blogs/";
+  return {type: "FETCH_BLOGS", payload: axios.get(url)}
+}
+
+export function fetchBlogsByUserName(userName) {
   var url = ServerURL + "/blogs/";
   if (!(userName === undefined)) {
     url = url + "user/" + userName;
+  }
+  return {type: "FETCH_BLOGS", payload: axios.get(url)}
+}
+
+export function fetchBlogsByCategory(category) {
+  var url = ServerURL + "/blogs";
+  if (!(category === undefined)) {
+    url = url + "?category=" + category;
   }
   return {type: "FETCH_BLOGS", payload: axios.get(url)}
 }
@@ -25,15 +38,16 @@ export function resetBlogStore() {
   return {type: 'RESET_BLOG_STATE'}
 }
 
+export function resetBlogCategoryStore() {
+  return {type: 'RESET_BLOGCATEGORY_STATE'}
+}
+
 export function fetchSingleBlog(blogId) {
   const url = ServerURL + "/blogs/" + blogId;
   return {type: "FETCH_SINGLE_BLOG", payload: axios.get(url)}
 }
 
-export function fetchCategories(category) {
-  var url = ServerURL + "/blogs/category";
-  if (!(category === undefined)) {
-    url = url + "/" + category;
-  }
+export function fetchCategories() {
+  var url = ServerURL + "/blogs/categories";
   return {type: "FETCH_CATEGORIES", payload: axios.get(url)}
 }

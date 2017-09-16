@@ -10,7 +10,11 @@ const initialState = {
   singleFetching: false,
   singleFetched: false,
   singleError: null,
-  singleBlog: {}
+  singleBlog: {},
+  categoryList: [],
+  categoryfetched: false,
+  categoryfetching: false,
+  categoryError: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -20,7 +24,7 @@ export default function reducer(state = initialState, action) {
       {
         return {
           ...state,
-          fetching: true
+          fetching: true,
         }
       }
     case "FETCH_BLOGS_REJECTED":
@@ -79,7 +83,17 @@ export default function reducer(state = initialState, action) {
           singleFetching: false,
           singleFetched: false,
           singleError: null,
-          singleBlog: {}
+          singleBlog: {},
+        }
+      }
+    case "RESET_BLOGCATEGORY_STATE":
+      {
+        return {
+          ...state,
+          categoryList: [],
+          categoryfetched: false,
+          categoryfetching: false,
+          categoryError: null
         }
       }
     case "FETCH_SINGLE_BLOG_PENDING":
@@ -104,6 +118,30 @@ export default function reducer(state = initialState, action) {
           singleFetching: false,
           singleFetched: true,
           singleBlog: action.payload.data
+        }
+      }
+    case "FETCH_CATEGORIES_PENDING":
+      {
+        return {
+          ...state,
+          categoryfetching: true
+        }
+      }
+    case "FETCH_CATEGORIES_REJECTED":
+      {
+        return {
+          ...state,
+          categoryfetching: false,
+          categoryError: action.payload
+        }
+      }
+    case "FETCH_CATEGORIES_FULFILLED":
+      {
+        return {
+          ...state,
+          categoryfetching: false,
+          categoryfetched: true,
+          categoryList: action.payload.data
         }
       }
   }

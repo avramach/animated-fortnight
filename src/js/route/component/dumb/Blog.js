@@ -15,7 +15,8 @@ export default class Blog extends React.Component {
           <hr></hr>
           <img class="img-responsive" src={blog.image} alt=""></img>
           <hr></hr>
-          <p class="lead">{blog.BlogMessage}</p>
+          <p class="lead">Content : {blog.blogMessage}</p>
+          <p class="lead">Category: {blog.category}</p>
           </div>
     );
   }

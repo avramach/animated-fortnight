@@ -27,7 +27,6 @@ export default class CommentList extends React.Component {
     ////console.log("CommentList ", {commentList});
 
     if (fetched === true) {
-      ////console.log("Comment Fetched Condition");
       const CommentsList = commentList.map((comment, i) => <CommentListItem key={comment.commentId} {...comment}/>);
       return (
         <div>
@@ -37,11 +36,9 @@ export default class CommentList extends React.Component {
         </div>
       );
     } else if (error) {
-      ////console.log("Comment Error Condition");
       return (<ErrorIndicator/>);
-    } else { //if ({fetching} === true)
-      ////console.log("Comment Fetching Condition");
-      return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
+    } else {
+      return (<ProgressBar/>);
     }
   }
 }

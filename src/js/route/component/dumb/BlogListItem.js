@@ -17,7 +17,8 @@ export default class BlogListItem extends React.Component {
         <p class="lead">Author :<Link to="userprofile/{blog.author}">{blog.author}</Link></p>
         <p><span class="glyphicon glyphicon-time"></span>Posted on August 28, 2013 at 10:45 PM</p>
         <img class="img-responsive" src={blog.image} alt=""></img><hr></hr>
-        <p>{blog.BlogMessage}</p>
+        <p>Content : {blog.blogMessage}</p>
+        <p>Category: {blog.category}</p>
         <Link class="btn btn-primary" to={this.navigate()}>Read More<span class="glyphicon glyphicon-chevron-right"></span></Link>
         <hr></hr>
       </div>
