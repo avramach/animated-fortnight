@@ -23,7 +23,6 @@ export default class UserProfile extends React.Component {
   render() {
     const {authenticated} = this.props;
     const {authenticatedUser} = this.props;
-    //console.log("UserProfile UserName",authenticatedUser);
     if (authenticated) {
       return (
         <div>

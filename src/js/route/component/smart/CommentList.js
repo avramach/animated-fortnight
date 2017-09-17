@@ -23,8 +23,6 @@ export default class CommentList extends React.Component {
     const {fetched} = this.props;
     const {fetching} = this.props;
     const {error} = this.props;
-    //////console.log("Props", this.props);
-    ////console.log("CommentList ", {commentList});
 
     if (fetched === true) {
       const CommentsList = commentList.map((comment, i) => <CommentListItem key={comment.commentId} {...comment}/>);

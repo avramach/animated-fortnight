@@ -42,6 +42,10 @@ export function resetBlogCategoryStore() {
   return {type: 'RESET_BLOGCATEGORY_STATE'}
 }
 
+export function resetSearchStore() {
+  return {type: 'RESET_SEARCH_STORE'}
+}
+
 export function fetchSingleBlog(blogId) {
   const url = ServerURL + "/blogs/" + blogId;
   return {type: "FETCH_SINGLE_BLOG", payload: axios.get(url)}
@@ -50,4 +54,9 @@ export function fetchSingleBlog(blogId) {
 export function fetchCategories() {
   var url = ServerURL + "/blogs/categories";
   return {type: "FETCH_CATEGORIES", payload: axios.get(url)}
+}
+
+export function fetchSearchResults(searchKey) {
+  var url = ServerURL + "/blogs/search?keyword="+searchKey;
+  return {type: "FETCH_SEARCH_RESULT", payload: axios.get(url)}
 }

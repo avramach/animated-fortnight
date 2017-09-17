@@ -35,7 +35,6 @@ export default class AddBlog extends React.Component {
 
   onSubmit(fields) {
     this.setState(fields);
-    ////console.log("Onsubmit AddBlog: ", this.state, fields);
     const token = this.props.authdetails.token;
     fields.author = this.props.authdetails.userName;
     this.props.dispatch(createBlog(token, fields))
@@ -57,16 +56,11 @@ export default class AddBlog extends React.Component {
     const {posting} = this.props;
     const {posterror} = this.props;
 
-    ////console.log("Rendering AddBlog ", this.props);
-
     if (posting === true) {
-      ////console.log("Posting Condition");
       return (<ProgressBar/>);
     } else if (posterror) {
-      ////console.log("Error Condition");
       return (<ErrorIndicator/>);
     } else if (posted === true) {
-      ////console.log("Posted Complete");
       return (<OverlayMessage message="New Blog Created" navigateClicked={this.navigateClicked} id="ok" title="OK"/>);
     } else {
       return (

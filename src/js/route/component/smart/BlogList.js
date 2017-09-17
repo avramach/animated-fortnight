@@ -17,23 +17,23 @@ export default class BlogList extends React.Component {
 
   componentWillMount() {
     this.props.dispatch(resetBlogStore())
-    this.fireBlogActions(this.props.userName,this.props.category);
+    this.fireBlogActions(this.props.userName, this.props.category);
   }
-  componentWillUpdate(nextProps, nextState) {
-    if((this.props.category != nextProps.category) || (this.props.userName != nextProps.userName)){
-    this.props.dispatch(resetBlogStore())
-    //console.error("Component Will update",nextProps.category,this.props.category);
-    this.fireBlogActions(nextProps.userName,nextProps.category);
-  }
-}
 
-  fireBlogActions(userName,category) {
+  componentWillUpdate(nextProps, nextState) {
+    if ((this.props.category != nextProps.category) || (this.props.userName != nextProps.userName)) {
+      this.props.dispatch(resetBlogStore())
+      //console.error("Component Will update",nextProps.category,this.props.category);
+      this.fireBlogActions(nextProps.userName, nextProps.category);
+    }
+  }
+
+  fireBlogActions(userName, category) {
     if (userName === undefined && category === undefined) {
       this.props.dispatch(fetchBlogs())
     } else if (category === undefined) {
       this.props.dispatch(fetchBlogsByUserName(userName))
     } else {
-      //console.error("Request Category",category)
       this.props.dispatch(fetchBlogsByCategory(category))
     }
   }
@@ -44,11 +44,10 @@ export default class BlogList extends React.Component {
     const {fetching} = this.props;
     const {error} = this.props;
     const {resetComplete} = this.props;
-    //////console.log("Props", this.props);
 
     if (fetched === true) {
       if (blogList.length) {
-        const BlogsList = blogList.map((blog, i) => <BlogListItem key={blog.blogId} {...blog}/>);
+        const BlogsList = blogList.map((blog, i) => <BlogListItem key={blog.blogId} blog={blog}/>);
         return (
           <div>
             <div class="row">{BlogsList}</div>

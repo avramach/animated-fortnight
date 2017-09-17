@@ -26,7 +26,7 @@ ReactDOM.render(
       <Route path="viewblog(/:blogId)" name="ViewBlog" component={ViewBlog}></Route>
       <Route path="newblog" name="NewBlog" component={NewBlog}></Route>
       <Route path="categories(/:category)" name="Categories" component={CategoryView}></Route>
-      <Route path="search(/:key)" name="Search" component={SearchView}></Route>
+      <Route path="search(/:searchKey)" name="Search" component={SearchView}></Route>
       <Route path="userprofile(/:userName)" name="UserProfile" component={ViewProfile}></Route>
       <Route path="signin(/:action)" name="SignIn" component={SignIn}></Route>
     </Route>

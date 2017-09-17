@@ -17,13 +17,11 @@ export default class SingleUser extends React.Component {
   componentWillMount() {
     const token = this.props.authdetails.token;
     const userName = this.props.userName;
-    //console.log("SingleUser UserName",this.props,userName)
     this.props.dispatch(resetUserStore())
     this.props.dispatch(fetchSingleUser(token, userName))
   }
 
   render() {
-    //console.log("SingleUser Props", this.props);
     const {singleUser} = this.props;
     const {singleFetched} = this.props;
     const {singleFetching} = this.props;

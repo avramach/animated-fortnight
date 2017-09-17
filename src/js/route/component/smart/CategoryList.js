@@ -24,11 +24,13 @@ export default class CategoryList extends React.Component {
     };
     this.navigateClicked = this.navigateClicked.bind(this);
   }
+
   componentWillMount() {
     this.selectCategory(this.props.category, 0);
     this.props.dispatch(resetBlogCategoryStore());
     this.props.dispatch(fetchCategories());
   }
+
   selectCategory(newCategory, newCount) {
     var selectedCategory = {
       category: newCategory,
@@ -40,8 +42,8 @@ export default class CategoryList extends React.Component {
         ...selectedCategory
       }
     }))
-//    this.props.dispatch(resetBlogStore());
   }
+
   navigate(category) {
     const {categoryList} = this.props;
     var index = categoryList.findIndex(function(categoryListItem) {

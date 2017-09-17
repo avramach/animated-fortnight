@@ -34,11 +34,9 @@ export default class RegisterUser extends React.Component {
 
   onSubmit(fields) {
     this.setState(fields);
-    //console.log("Onsubmit RegisterUser: ", this.state, fields);
     this.props.dispatch(registerUser(fields))
   }
   navigateClicked() {
-    ////console.log("Navigate Called", this.props);
     this.props.history.pushState(null, navigateLink());
   }
   navigateLink() {
@@ -50,16 +48,11 @@ export default class RegisterUser extends React.Component {
     const {registering} = this.props;
     const {registerError} = this.props;
 
-    ////console.log("Rendering RegisterUser", this.props);
-
     if (registering === true) {
-      ////console.log("registering Condition");
       return (<ProgressBar/>);
     } else if (registerError) {
-      ////console.log("Register Error Condition");
       return (<ErrorIndicator/>);
     } else if (registered === true) {
-      ////console.log("Posted Complete");
       return (
         <OverlayMessage message="User Succesfully Created" navigateClicked={this.navigateClicked} id="login" title="LOGIN"/>
       );

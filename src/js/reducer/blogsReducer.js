@@ -15,6 +15,10 @@ const initialState = {
   categoryfetched: false,
   categoryfetching: false,
   categoryError: null,
+  searchResults: [],
+  searchFetched: false,
+  searchFetching: false,
+  searchError: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -96,6 +100,16 @@ export default function reducer(state = initialState, action) {
           categoryError: null
         }
       }
+    case "RESET_SEARCH_STORE":
+      {
+        return {
+          ...state,
+          searchResults: [],
+          searchFetched: false,
+          searchFetching: false,
+          searchError: null
+        }
+      }
     case "FETCH_SINGLE_BLOG_PENDING":
       {
         return {
@@ -142,6 +156,30 @@ export default function reducer(state = initialState, action) {
           categoryfetching: false,
           categoryfetched: true,
           categoryList: action.payload.data
+        }
+      }
+    case "FETCH_SEARCH_RESULTS_PENDING":
+      {
+        return {
+          ...state,
+          searchFetching: true
+        }
+      }
+    case "FETCH_SEARCH_RESULT_REJECTED":
+      {
+        return {
+          ...state,
+          searchFetching: false,
+          searchError: action.payload
+        }
+      }
+    case "FETCH_SEARCH_RESULT_FULFILLED":
+      {
+        return {
+          ...state,
+          searchFetching: false,
+          searchFetched: true,
+          searchResults: action.payload.data
         }
       }
   }

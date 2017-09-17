@@ -33,7 +33,6 @@ export default class AddBlog extends React.Component {
 
   onSubmit(fields) {
     this.setState(fields);
-    //console.log("Onsubmit AddComment: ", this.state, fields);
     const token = this.props.authdetails.token;
     fields.author = this.props.authdetails.userName;
     fields.blogId = this.props.blogId;
@@ -57,16 +56,11 @@ export default class AddBlog extends React.Component {
     const {posterror} = this.props;
     const {blogId} = this.props;
 
-    ////console.log("Rendering AddComment ", this.props, blogId);
-
     if (posting === true) {
-      ////console.log("Posting Condition");
-      return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
+      return (<ProgressBar/>);
     } else if (posterror) {
-      ////console.log("AddComment Error Condition");
       return (<ErrorIndicator/>);
     } else if (posted === true) {
-      ////console.log("Posted Complete");
       return (
         <div>
         <CommentForm onSubmit={this.onSubmit.bind(this)}/>

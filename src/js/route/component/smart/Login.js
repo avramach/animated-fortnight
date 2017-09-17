@@ -24,32 +24,30 @@ export default class Login extends React.Component {
     };
     this.navigateClicked = this.navigateClicked.bind(this);
   }
+
   logOut() {
-    //console.log("Loggin Out", this.state,this.props)
     this.props.dispatch(resetAuthenticateStore());
   }
 
   onSubmit(fields) {
     this.setState(fields);
-    ////console.log("Onsubmit Login : ", this.state, fields);
     this.props.dispatch(authenticateUser(fields))
   }
+
   navigate(action) {
-    //console.log("Navigate Called", this.props, action);
     var link = "";
     if (action == "logout") {
       link = "signin/login";
     } else {
-      //link = "userprofile" + this.props.authenticatedUser.userName;
-      link = "userprofile"; 
+      link = "userprofile";
     }
     this.props.navigate(link);
   }
-  navigateClicked= e => {
+
+  navigateClicked = e => {
     e.preventDefault();
-    ////console.log("navigateClicked of Login", this.state,this.props,e.target.id)
-    if(e.target.id == "logout"){
-    this.logOut();
+    if (e.target.id == "logout") {
+      this.logOut();
     }
     this.navigate(e.target.id);
   }
@@ -60,20 +58,15 @@ export default class Login extends React.Component {
     const {authenticateError} = this.props;
     const {authenticatedUser} = this.props;
 
-    ////console.log("Rendering Login", this.props);
-
     if (authenticating === true) {
-      ////console.log("Authenticating Condition");
       return (<ProgressBar/>);
     } else if (authenticateError) {
-      ////console.log("Authenticate Error Condition");
       return (<ErrorIndicator/>);
     } else if (authenticated === true) {
-      ////console.log("Authentication Complete");
       return (
         <div>
-        <OverlayMessage message="Log in Success, View Profile " navigateClicked={this.navigateClicked} id="profile" title="Profile"/>
-        <OverlayMessage message="Logout" navigateClicked={this.navigateClicked} id="logout" title="Logout "/>
+          <OverlayMessage message="Log in Success, View Profile " navigateClicked={this.navigateClicked} id="profile" title="Profile"/>
+          <OverlayMessage message="Logout" navigateClicked={this.navigateClicked} id="logout" title="Logout "/>
         </div>
       );
     } else {

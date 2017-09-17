@@ -23,7 +23,6 @@ export default class UserList extends React.Component {
     const {fetched} = this.props;
     const {fetching} = this.props;
     const {error} = this.props;
-    //////console.log("Props", this.props);
     if (fetched === true) {
       const UsersList = userList.map((user, i) => <UserListItem key={i} user={user}/>);
       return (

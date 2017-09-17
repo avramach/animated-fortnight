@@ -20,21 +20,17 @@ export default class SingleBlog extends React.Component {
   }
 
   navigate(link) {
-    //console.log("SINGLE BLOG NAVIGATION",link);
     this.props.history.pushState(null, link);
   }
 
   render() {
-    //console.log("SingleBlog Props",this.props);
     const blogId = this.props.blogId;
     const {singleBlog} = this.props;
     const {singleFetched} = this.props;
     const {singleFetching} = this.props;
     const {singleError} = this.props;
-    ////console.log("Props", this.props);
 
     if (singleFetched === true) {
-      ////console.log("Single Blog item Fetched Condition");
       return (
         <div>
           <div class="row">
@@ -44,15 +40,12 @@ export default class SingleBlog extends React.Component {
               <CommentList blogId={blogId}/>
             </div>
           </div>
-
         </div>
       );
     } else if (singleError) {
-      ////console.log("Single Blog Error Condition");
       return (<ErrorIndicator/>);
-    } else { //if ({singleFetching} === true)
-      ////console.log("Single Blog Fetching Condition");
-      return (<ProgressBar/>); //return (<h1>Fetching Blogs Loading Spinner</h1>);
+    } else {
+      return (<ProgressBar/>);
     }
   }
 
