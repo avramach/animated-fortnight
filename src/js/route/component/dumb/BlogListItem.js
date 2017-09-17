@@ -3,7 +3,7 @@ import {Link} from "react-router";
 
 export default class BlogListItem extends React.Component {
   navigate(){
-    return "viewblog/" +this.props.blogId;
+    return "viewblog/" +this.props.blog.blogId;
   }
   render() {
     const  {blog}  = this.props;

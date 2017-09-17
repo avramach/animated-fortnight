@@ -1,6 +1,7 @@
-/*Refactor and convert to single CRUD layer*/
 import axios from "axios";
-const ServerURL = "http://192.168.0.103:8080/reactx"
+
+const ServerURL = __API__;
+
 export function fetchUsers(token) {
   const url = ServerURL+"/users/";
   const headers = { 'Authorization': token};
@@ -12,7 +13,6 @@ export function fetchUsers(token) {
 
 export function registerUser(user) {
   const url = ServerURL+"/users/";
-  //console.log("CREATE USER",user)
   return {
   type: "REGISTER_USER",
   payload:   axios.post(url,user)

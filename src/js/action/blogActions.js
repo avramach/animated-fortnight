@@ -1,6 +1,6 @@
-/*Refactor and convert to single CRUD layer*/
 import axios from "axios";
-const ServerURL = "http://192.168.0.103:8080/reactx"
+
+const ServerURL = __API__;
 
 export function fetchBlogs() {
   var url = ServerURL + "/blogs/";
